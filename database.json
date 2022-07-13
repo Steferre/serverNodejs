@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "database": "ng_server",
+    "driver":  "mysql",
+    "user":  {"ENV": "db_user"},
+    "password":  {"ENV": "db_password"},
+    "host":  {"ENV": "db_host"},
+    "port":  {"ENV": "db_port"},
+    "multipleStatements": true
+  },
+  "sql-file" : true
+}
+
+

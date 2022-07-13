@@ -1,0 +1,65 @@
+CREATE TABLE `emailqueue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` text NOT NULL,
+  `replyto` text DEFAULT NULL,
+  `recipient` text DEFAULT NULL,
+  `cc` text DEFAULT NULL,
+  `bcc` text DEFAULT NULL,
+  `subject` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `attachment` text DEFAULT NULL,
+  `extra_info` text DEFAULT NULL,
+  `request_datetime` datetime NOT NULL,
+  `sending_datetime` datetime DEFAULT NULL,
+  `email_id` int(11) NOT NULL,
+  `messageID` varchar(2048) DEFAULT NULL,
+  `attempts` int(10) unsigned DEFAULT 0,
+  `lastError` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `origin` enum('internal','campus') NOT NULL DEFAULT 'internal',
+  `firstname` varchar(255) NOT NULL DEFAULT '',
+  `lastname` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `login` varchar(255) DEFAULT NULL,
+  `udvlist` varchar(1024) DEFAULT NULL,
+  `udvsel` varchar(255) DEFAULT NULL,
+  `externalUserId` int(10) unsigned DEFAULT 0,
+  `ssoUserCensimento` int(10) unsigned DEFAULT NULL,
+  `ssoUserCampus` int(11) DEFAULT NULL,
+  `otpSecret` varchar(256) DEFAULT NULL,
+  `password` varchar(1024) NOT NULL,
+  `salt` varchar(1024) NOT NULL DEFAULT '',
+  `mobile` varchar(255) DEFAULT NULL,
+  `telegram_id` varchar(255) DEFAULT NULL,
+  `date_create` datetime NOT NULL,
+  `date_edit` datetime DEFAULT NULL,
+  `role` int(11) DEFAULT NULL,
+  `status` enum('on','off') NOT NULL,
+  `force_password_change` tinyint(4) NOT NULL DEFAULT 0,
+  `batch_id` text NOT NULL,
+  `userfield_role` varchar(1024) DEFAULT NULL,
+  `userfield_area` varchar(1024) DEFAULT NULL,
+  `userfield_resp` varchar(1024) DEFAULT NULL,
+  `cert_decoration` tinyint(1) DEFAULT 1,
+  `notification_sent` tinyint(1) DEFAULT 0,
+  `last_notification` datetime DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `custom_fields` text DEFAULT NULL,
+  `tmEventDraftsCheck` tinyint(11) DEFAULT 0,
+  `tmEventRuntimeCheck` tinyint(11) DEFAULT 0,
+  `censimentoEnable` tinyint(4) DEFAULT 0,
+  `targetmarketEnable` tinyint(4) DEFAULT 0,
+  `readonly` tinyint(4) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_idx` (`email`),
+  UNIQUE KEY `login_idx` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `users` (`origin`, `firstname`, `lastname`, `email`, `login`, `date_create`, `role`, `status` )
+VALUES ('internal', 'Corrado', 'Bonacina', 'corrado.bonacina@keyos.it', 'corrado.bonacina', NOW(), 1, 'on');
+
